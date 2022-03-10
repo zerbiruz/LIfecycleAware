@@ -1,11 +1,14 @@
 package com.example.lifecycleaware
 
+import android.app.Application
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.*
 
-class MainViewModel(private val context: Context) : ViewModel(), DefaultLifecycleObserver {
+//class MainViewModel(private val context: Context) : ViewModel(), DefaultLifecycleObserver {
+class MainViewModel(application: Application) : AndroidViewModel(application), DefaultLifecycleObserver {
+
 
     private val TAG = "MyObserver"
 
@@ -29,7 +32,7 @@ class MainViewModel(private val context: Context) : ViewModel(), DefaultLifecycl
 
     override fun onResume(owner: LifecycleOwner) {
         super.onResume(owner)
-        Toast.makeText(context, "Retrieving data ...", Toast.LENGTH_SHORT).show()
+        Toast.makeText(getApplication(), "Retrieving data ...", Toast.LENGTH_SHORT).show()
         Log.i(TAG, "onResume")
     }
 
@@ -41,7 +44,7 @@ class MainViewModel(private val context: Context) : ViewModel(), DefaultLifecycl
     override fun onStop(owner: LifecycleOwner) {
         super.onStop(owner)
         _count.value = _count?.value?.plus(1)
-        Toast.makeText(context, "Preparing to exit ...", Toast.LENGTH_SHORT).show()
+        Toast.makeText(getApplication(), "Preparing to exit ...", Toast.LENGTH_SHORT).show()
         Log.i(TAG, "onStop")
     }
 

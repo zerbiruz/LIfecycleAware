@@ -20,7 +20,10 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        mainViewModelFactory = MainViewModelFactory(requireActivity())
+        val application = requireNotNull(this.activity).application
+//        mainViewModelFactory = MainViewModelFactory(requireActivity())
+        mainViewModelFactory = MainViewModelFactory(application)
+
         mainViewModel = ViewModelProvider(this, mainViewModelFactory)[MainViewModel::class.java]
         binding = FragmentMainBinding.inflate(inflater, container, false)
 
